@@ -1,11 +1,11 @@
 ---
 title: "Welcome To My Blog"
-author: "YOUR NAME"
-date: "2023-10-27"
+author: "Devin Li"
+date: "2023-12-11"
 categories: [news]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+Hi welcome to my blogs!
 
 ![](thumbnail.jpg)
 

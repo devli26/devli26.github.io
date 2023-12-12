@@ -1,0 +1,69 @@
+---
+title: "Beer Market"
+author: "Devin Li"
+date: "2023-11-02"
+categories: [beer, code, data-analysis]
+image: "beer.jpg"
+
+execute: 
+  warning: false
+  message: false
+  
+toc: true
+---
+```{r}
+#| include: false
+
+library(knitr)
+library(rmarkdown)
+library(tidyverse)
+library(skimr)
+library(ggthemes)
+library(hrbrthemes)
+
+theme_set(theme_ipsum()+
+          theme(strip.background =element_rect(fill="lightgray"),
+                axis.title.x  = element_text(angle = 0,
+                                            size = rel(1.5),
+                                            margin = margin(10,0,0,0)),
+                axis.title.y  = element_text(angle = 0,
+                                            size = rel(1.5),
+                                            margin = margin(0,10,0,0))
+                )
+          )
+```
+
+```{r}
+beer_markets <- read_csv('https://bcdanl.github.io/data/beer_markets.csv')
+```
+We can see that majority of beer purchased uses canned containers.
+```{r}
+ggplot(beer_markets) +
+  geom_bar(aes(x= container))
+```
+
+
+
+Majority of beers purchased from house hold is from Budlight
+```{r}
+q2c2 <- beer_markets %>% 
+  group_by(hh, brand) %>%
+  summarise(n=n()) %>% 
+  group_by(hh) %>% 
+  mutate(prop= n/sum(n))
+ggplot(q2c2)+
+  geom_bar(aes(x=n,))+
+  facet_wrap(.~ brand)
+```
+
+It seems like the highest mean dollar spent is miller light.
+```{r}
+meanbeer <- beer_markets %>% 
+  group_by(brand) %>% 
+  summarise(mean= mean(dollar_spent))
+ggplot(meanbeer) +
+  geom_bar(aes(x = brand, y = mean), stat = "identity")
+
+
+
+```

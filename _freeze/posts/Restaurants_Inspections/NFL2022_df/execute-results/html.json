@@ -1,0 +1,16 @@
+{
+  "hash": "2139b3ba213d24e872a02ce7b4be0dbf",
+  "result": {
+    "markdown": "---\ntitle: \"Restaurant Inspection\"\nauthor: \"Devin Li\"\ndate: \"2023-11-02\"\ncategories: [code, data-analysis]\nimage: \"image.png\"\n\nexecute: \n  warning: false\n  message: false\n  \ntoc: true\n---\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nrestaurant <- read_csv('https://bcdanl.github.io/data/DOHMH_NYC_Restaurant_Inspection.csv')\n```\n:::\n\n\nIn NYC, the lower your grade, there seems to be an increase for critical.\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(restaurant) +\n  geom_freqpoly(aes( x = SCORE))+\n  facet_wrap(GRADE~\n               `CRITICAL FLAG`, scales = \"free_y\", nrow = 5,)\n```\n\n::: {.cell-output-display}\n![](NFL2022_df_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\nIn NYC the lower your grade is, the higher the chance your Critical Flag is in the Critical zone.\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(restaurant, aes(y= GRADE, fill = `CRITICAL FLAG`)) +\n  geom_bar()+ \n  facet_wrap( . ~ BORO,\n              nrow = 5,\n              scales =  \"free\")\n```\n\n::: {.cell-output-display}\n![](NFL2022_df_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::",
+    "supporting": [
+      "NFL2022_df_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "hash": "af12955da29df6c05af0ef1d8dda8dde",
+  "result": {
+    "markdown": "---\ntitle: \"Spotify\"\nauthor: \"Devin Li\"\ndate: \"2023-11-02\"\ncategories: [data-analysis]\nimage: \"unnamed.png\"\n\nexecute: \n  warning: false\n  message: false\n  \ntoc: true\n---\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nspotify_all <- read_csv('https://bcdanl.github.io/data/spotify_all.csv')\n```\n:::\n\n\nFor the top 10 artists, they prefer to have more less pos than a larger amount of pos.\n\n::: {.cell}\n\n```{.r .cell-code}\nQ1a <- spotify_all %>%\n  group_by(artist_name, track_name) %>% \n  summarise(n = n()) %>% \n  arrange(-n)\ntop10 <- Q1a[1:10,]\nq1c <- spotify_all %>% \n  filter(artist_name %in% top10$artist_name)\n\nggplot(q1c)+\ngeom_freqpoly(aes(x= pos))+\nfacet_wrap(~`artist_name`, scales = \"free\", nrow = 5)\n```\n\n::: {.cell-output-display}\n![](NFL2022_df_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n",
+    "supporting": [
+      "NFL2022_df_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

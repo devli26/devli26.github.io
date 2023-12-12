@@ -1,0 +1,16 @@
+{
+  "hash": "5d3547501e4aa800645c771e920361d5",
+  "result": {
+    "markdown": "---\ntitle: \"Beer Market\"\nauthor: \"Devin Li\"\ndate: \"2023-11-02\"\ncategories: [beer, code, data-analysis]\nimage: \"beer.jpg\"\n\nexecute: \n  warning: false\n  message: false\n  \ntoc: true\n---\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nbeer_markets <- read_csv('https://bcdanl.github.io/data/beer_markets.csv')\n```\n:::\n\nWe can see that majority of beer purchased uses canned containers.\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(beer_markets) +\n  geom_bar(aes(x= container))\n```\n\n::: {.cell-output-display}\n![](NFL2022_df_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\n\n\nMajority of beers purchased from house hold is from Budlight\n\n::: {.cell}\n\n```{.r .cell-code}\nq2c2 <- beer_markets %>% \n  group_by(hh, brand) %>%\n  summarise(n=n()) %>% \n  group_by(hh) %>% \n  mutate(prop= n/sum(n))\nggplot(q2c2)+\n  geom_bar(aes(x=n,))+\n  facet_wrap(.~ brand)\n```\n\n::: {.cell-output-display}\n![](NFL2022_df_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::\n\n\nIt seems like the highest mean dollar spent is miller light.\n\n::: {.cell}\n\n```{.r .cell-code}\nmeanbeer <- beer_markets %>% \n  group_by(brand) %>% \n  summarise(mean= mean(dollar_spent))\nggplot(meanbeer) +\n  geom_bar(aes(x = brand, y = mean), stat = \"identity\")\n```\n\n::: {.cell-output-display}\n![](NFL2022_df_files/figure-html/unnamed-chunk-5-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "NFL2022_df_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

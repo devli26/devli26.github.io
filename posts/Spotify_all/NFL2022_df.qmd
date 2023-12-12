@@ -1,0 +1,59 @@
+---
+title: "Spotify"
+author: "Devin Li"
+date: "2023-11-02"
+categories: [data-analysis]
+image: "unnamed.png"
+
+execute: 
+  warning: false
+  message: false
+  
+toc: true
+---
+```{r}
+#| include: false
+
+library(knitr)
+library(rmarkdown)
+library(tidyverse)
+library(skimr)
+library(ggthemes)
+library(hrbrthemes)
+
+theme_set(theme_ipsum()+
+          theme(strip.background =element_rect(fill="lightgray"),
+                axis.title.x  = element_text(angle = 0,
+                                            size = rel(1.5),
+                                            margin = margin(10,0,0,0)),
+                axis.title.y  = element_text(angle = 0,
+                                            size = rel(1.5),
+                                            margin = margin(0,10,0,0))
+                )
+          )
+```
+
+```{r}
+spotify_all <- read_csv('https://bcdanl.github.io/data/spotify_all.csv')
+```
+
+For the top 10 artists, they prefer to have more less pos than a larger amount of pos.
+```{r}
+Q1a <- spotify_all %>%
+  group_by(artist_name, track_name) %>% 
+  summarise(n = n()) %>% 
+  arrange(-n)
+top10 <- Q1a[1:10,]
+q1c <- spotify_all %>% 
+  filter(artist_name %in% top10$artist_name)
+
+ggplot(q1c)+
+geom_freqpoly(aes(x= pos))+
+facet_wrap(~`artist_name`, scales = "free", nrow = 5)
+```
+
+```{r}
+```
+
+```{r}
+```
