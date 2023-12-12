@@ -33,6 +33,8 @@ theme_set(theme_ipsum()+
           )
 ```
 
+Github link:(https://github.com/devli26/devli26.github.io)
+
 ```{r}
 NFL2022_stuffs <- read_csv('https://bcdanl.github.io/data/NFL2022_stuffs.csv')
 ```
